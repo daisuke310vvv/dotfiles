@@ -1,10 +1,11 @@
 #!/usr/bin/zsh
+export PATH=/usr/local/bin:$PATH
 export LC_CTYPE=ja_JP.UTF-8
 export LANG=ja_JP.UTF-8
 export JLESSCHARSET=japanese-sjis
 export OUTPUT_CHARSET=utf-8
 export XDG_DATA_HOME=/usr/local/share
-export PATH="/usr/local/opt/ruby/bin:/usr/local/bin:$PATH"
+#export PATH="/usr/local/opt/ruby/bin:/usr/local/bin:$PATH"
 setopt complete_aliases
 
 alias  xcode='open -a /Applications/Xcode.app "$@"'
@@ -14,6 +15,7 @@ alias la='ls -A'
 alias sudo='env PATH=${PATH}:/sbin:/usr/sbin:/usr/local/sbin \sudo'
 alias screen='screen -U'
 alias remote='ssh -i ~/.ssh/id_rsa admin@192.168.0.2'
+alias geeknote='~/geeknote/geeknote.py'
 
 alias path="echo -e ${PATH//:/\\n}"
 alias mvim="mvim --remote-tab-silent"
@@ -90,8 +92,9 @@ PROMPT+=" %{$color%}$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 
 # Python
 #----------------------------------------------------------
 export NOSE_REDNOSE=1
-#export PATH=$HOME/.npm/bin:$PATH
-export PATH=/usr/local/Cellar/python/2.7.5/bin:$PATH
+export PATH=$HOME/.npm/bin:$PATH
+#export PATH=/usr/local/share/python:$PATH
+#export PATH=/usr/local/lib/python3/:$PATH
 export NODE_PATH=$HOME/.npm/libraries:$NODE_PATH
 export MANPATH=$HOME/.npm/man:$MANPATH
 setopt no_hup
@@ -120,3 +123,11 @@ fpath=(~/.zsh/functions/Completion ${fpath})
 #my setting 
 function mk () { mkdir -p "$@" && eval cd "\"\$$#\""; }
 function calc(){ awk "BEGIN{ print $* }" ;}
+
+export DYLD_LIBRARY_PATH=/Users/satodaisuke/github_Dir/C/DSImageProcessingMethods/lib:$DYLD_LIBRARY_PATH
+
+unset LD_LIBRARY_PATH
+unset DYLD_LIBRARY_PATH
+
+export PATH="$HOME/.rbenv/shims:$PATH"
+
