@@ -205,4 +205,3 @@ hi PmenuSel ctermbg=blue ctermfg=black
 hi PmenuSbar ctermbg=0 ctermfg=9
 hi PmenuSbar ctermbg=255 ctermfg=0 guifg=#000000 guibg=#FFFFFF
 
-

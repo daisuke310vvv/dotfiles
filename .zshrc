@@ -5,8 +5,10 @@ export LANG=ja_JP.UTF-8
 export JLESSCHARSET=japanese-sjis
 export OUTPUT_CHARSET=utf-8
 export XDG_DATA_HOME=/usr/local/share
+export EDITOR=vim
 #export PATH="/usr/local/opt/ruby/bin:/usr/local/bin:$PATH"
 setopt complete_aliases
+
 
 alias  xcode='open -a /Applications/Xcode.app "$@"'
 alias ls='ls -hF'
@@ -112,13 +114,16 @@ LANG=C command make "$@" 2>&1 | sed -e "s@[Ee]rror:.*@$e_RED&$e_normal@g" -e "s@
 #----------------------------------------------------------
 [ -f ~/.zshrc.mine ] && source ~/.zshrc.mine
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-[[ -s "${HOME}/.rvm/scripts/rvm" ]] && source $HOME/.rvm/scripts/rvm
-[[ -s "${HOME}/.perl5/perlbrew/etc/bashrc" ]] && source $HOME/.perl5/perlbrew/etc/bashrc
+
+#PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+#[[ -s "${HOME}/.rvm/scripts/rvm" ]] && source $HOME/.rvm/scripts/rvm
+#[[ -s "${HOME}/.perl5/perlbrew/etc/bashrc" ]] && source $HOME/.perl5/perlbrew/etc/bashrc
 
 PATH=/usr/local/bin:$PATH
 export PATH
 fpath=(~/.zsh/functions/Completion ${fpath})
+
+#export PATH=/usr/local/Cellar:$PATH
 
 #my setting 
 function mk () { mkdir -p "$@" && eval cd "\"\$$#\""; }
@@ -130,4 +135,8 @@ unset LD_LIBRARY_PATH
 unset DYLD_LIBRARY_PATH
 
 export PATH="$HOME/.rbenv/shims:$PATH"
+#export PATH="$HOME/.rbenv/versions/1.9.3-p392/bin:$PATH"
+ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
+# go
+export PATH=$PATH:/usr/local/go/bin
