@@ -1,6 +1,4 @@
-"===========================================================
 " NeoBundle
-"===========================================================
 set nocompatible
 filetype off
 
@@ -130,6 +128,15 @@ else
 	NeoBundle 'nanotech/jellybeans.vim'
 	NeoBundle 'vim-scripts/rdark'
 	NeoBundle 'vim-scripts/twilight'
+	NeoBundle 'tomasr/molokai'
+	NeoBundle 'therubymug/vim-pyte'
+	NeoBundle 'vim-scripts/Zenburn'
+	NeoBundle 'vim-scripts/Lucius'
+	NeoBundle 'mrkn/mrkn256.vim'
+	NeoBundle 'croaker/mustang-vim'
+	NeoBundle 'jeffreyiacono/vim-colors-wombat'
+	NeoBundle 'chriskempson/vim-tomorrow-theme'
+
 
 	"------------------------------------------------------
 	" syntastic
@@ -181,7 +188,7 @@ autocmd VimEnter * NERDTree
 syntax enable
 "let g:solarized_termcolors=256
 "set background=dark
-colorscheme hybrid
+colorscheme Tomorrow-Night-Bright
 
 set number 
 set autoindent 
@@ -205,3 +212,17 @@ hi PmenuSel ctermbg=blue ctermfg=black
 hi PmenuSbar ctermbg=0 ctermfg=9
 hi PmenuSbar ctermbg=255 ctermfg=0 guifg=#000000 guibg=#FFFFFF
 
+
+
+"-----------------------------------------------------
+" go lang
+"-----------------------------------------------------
+filetype off
+filetype plugin indent off
+set rtp +=$GOROOT/misc/vim
+filetype plugin indent on
+syntax on
+autocmd FileType go autocmd BufWritePre <buffer> Fmt
+exe "set rtp+=".globpath($GOPATH,"src/github.com/nsf/gocode/vim")
+set completeopt=menu,preview
+"-----------------------------------------------------

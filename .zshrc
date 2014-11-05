@@ -2,15 +2,16 @@
 export PATH=/usr/local/bin:$PATH
 export LC_CTYPE=ja_JP.UTF-8
 export LANG=ja_JP.UTF-8
-export JLESSCHARSET=japanese-sjis
+export JLESSCHARSET=ja_JP.UTF-8
 export OUTPUT_CHARSET=utf-8
 export XDG_DATA_HOME=/usr/local/share
 export EDITOR=vim
 #export PATH="/usr/local/opt/ruby/bin:/usr/local/bin:$PATH"
 setopt complete_aliases
+export LC_ALL="en_US.UTF-8"
 
-
-alias  xcode='open -a /Applications/Xcode.app "$@"'
+alias drop='~/workspace/Dropbox-Uploader/dropbox_uploader.sh'
+alias xcode='open -a /Applications/Xcode.app "$@"'
 alias ls='ls -hF'
 alias ll='ls -l'
 alias la='ls -A'
@@ -135,8 +136,15 @@ unset LD_LIBRARY_PATH
 unset DYLD_LIBRARY_PATH
 
 export PATH="$HOME/.rbenv/shims:$PATH"
+#export PATH="$HOME/.rbenv/version:$PATH"
 #export PATH="$HOME/.rbenv/versions/1.9.3-p392/bin:$PATH"
  if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # go
-export PATH=$PATH:/usr/local/go/bin
+export GOROOT=/Users/satodaisuke/.gvm/gos/go1.3.3/
+export GOPATH=/Users/satodaisuke/.gvm/pkgsets/go1.3.3/global/
+export PATH=“$GOROOT/bin/$PATH”
+
+#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+[[ -s "/Users/satodaisuke/.gvm/bin/gvm-init.sh" ]] && source "/Users/satodaisuke/.gvm/bin/gvm-init.sh"
+[[ -s "/Users/satodaisuke/.gvm/scripts/gvm" ]] && source "/Users/satodaisuke/.gvm/scripts/gvm"
