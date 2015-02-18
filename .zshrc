@@ -148,3 +148,5 @@ export PATH=“$GOROOT/bin/$PATH”
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/satodaisuke/.gvm/bin/gvm-init.sh" ]] && source "/Users/satodaisuke/.gvm/bin/gvm-init.sh"
 [[ -s "/Users/satodaisuke/.gvm/scripts/gvm" ]] && source "/Users/satodaisuke/.gvm/scripts/gvm"
+[[ -s "/Users/dsk/.gvm/scripts/gvm" ]] && source "/Users/dsk/.gvm/scripts/gvm"
+eval "$(rbenv init -)"
