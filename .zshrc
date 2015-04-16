@@ -150,3 +150,14 @@ export PATH=“$GOROOT/bin/$PATH”
 [[ -s "/Users/satodaisuke/.gvm/scripts/gvm" ]] && source "/Users/satodaisuke/.gvm/scripts/gvm"
 [[ -s "/Users/dsk/.gvm/scripts/gvm" ]] && source "/Users/dsk/.gvm/scripts/gvm"
 eval "$(rbenv init -)"
+
+#Swift
+SDKROOT=$(xcrun --show-sdk-path -sdk macosx)
+alias swiftc="swiftc -sdk $SDKROOT"
+
+#Node
+export NODE_PATH=$NODE_PATH:/usr/local/lib/node_modules
+
+#Scala
+export SCALA_HOME=/usr/local/opt/scala/
+export PATH=$PATH:$SCALA_HOME/bin

@@ -99,15 +99,18 @@ autocmd VimEnter * NERDTree
 "- syntax
 NeoBundle 'chriskempson/vim-tomorrow-theme'
 
-"- 構文チェック
-NeoBundle "scrooloose/syntastic",{
-			\ "build" : {
-			\ "mac" : ["pip install flake8","npm -g install coffeelint"],
-			\ "unix" : ["pip install flake8","npm -g install coffeelint"],
-			\ }}
+" "- 構文チェック
+" NeoBundle "scrooloose/syntastic",{
+" 			\ "build" : {
+" 			\ "mac" : ["pip install flake8","npm -g install coffeelint"],
+" 			\ "unix" : ["pip install flake8","npm -g install coffeelint"],
+" 			\ }}
 
 "- 囲み文字操作
 NeoBundle 'tpope/vim-surround'
+
+"- vim-scala
+NeoBundle 'derekwyatt/vim-scala'
 
 NeoBundleCheck
 call neobundle#end()
@@ -132,7 +135,7 @@ set list
 
 "- indent
 set autoindent
-set smartindent
+"set smartindent
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -145,6 +148,12 @@ autocmd FileType * setlocal formatoptions-=ro
 "- macro
 "- 素早くjjを押した場合ESC
 inoremap jj <Esc>
+
+"- 閉じ括弧補完
+inoremap ( ()
+inoremap { {}
+inoremap [ []
+inoremap < <>
 
 "- <C-c>２回でハイライト消す
 set hlsearch
@@ -173,3 +182,10 @@ nnoremap s= <C-w>=
 nnoremap s> <C-w>>
 "- 幅を減らす
 nnoremap s< <C-w>< 
+
+if has("autocmd")
+	filetype indent on
+	autocmd FileType ruby	setlocal sw=2 sts=2 ts=2 et
+	autocmd FileType eruby	setlocal sw=2 sts=2 ts=2 et
+	autocmd FileType scss	setlocal sw=2 sts=2 ts=2 et
+endif
