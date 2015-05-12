@@ -1,0 +1,17 @@
+"*":
+  "exception-reporting":
+    userId: "750b88ae-6ef7-5dbc-cd4f-ebbba4d55260"
+  welcome:
+    showOnStartup: false
+  core:
+    audioBeep: false
+    followSymlinks: false
+    themes: [
+      "dark-flat-ui"
+    ]
+  editor:
+    invisibles: {}
+    fontSize: 13
+    lineHeight: 1
+    softWrap: true
+    softWrapHangingIndent: 2
