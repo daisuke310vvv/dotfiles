@@ -19,5 +19,4 @@ brew 'rbenv'
 brew 'redis'
 brew 'caskroom/cask/brew-cask'
 # cask
-cask 'vagrant'
-cask 'virtualbox'
+cask 'dockertoolbox'
