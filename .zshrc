@@ -158,6 +158,15 @@ alias swiftc="swiftc -sdk $SDKROOT"
 #Node
 export NODE_PATH=$NODE_PATH:/usr/local/lib/node_modules
 
+#NVM
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+
 #Scala
 export SCALA_HOME=/usr/local/opt/scala/
 export PATH=$PATH:$SCALA_HOME/bin
+
+# Swift
+export SWIFTENV_ROOT="$HOME/.swiftenv"
+export PATH="$SWIFTENV_ROOT/bin:$PATH"
+eval "$(swiftenv init -)"
