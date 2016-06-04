@@ -47,10 +47,10 @@ elseif neobundle#is_installed('neocomplcache')
 		let g:neocomplcache_keyword_patterns = {}
 	endif
 
-	let g:neocomplcache_keyword_patterns._ = '\h\w*'
-	let g:neocomplcache_enable_camel_case_completion = 1
-	let g:neocomplcache_enable_underbar_completion = 1
-endif
+"	let g:neocomplcache_keyword_patterns._ = '\h\w*'
+"	let g:neocomplcache_enable_camel_case_completion = 1
+"	let g:neocomplcache_enable_underbar_completion = 1
+"endif
 
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
@@ -99,18 +99,8 @@ autocmd VimEnter * NERDTree
 "- syntax
 NeoBundle 'chriskempson/vim-tomorrow-theme'
 
-" "- 構文チェック
-" NeoBundle "scrooloose/syntastic",{
-" 			\ "build" : {
-" 			\ "mac" : ["pip install flake8","npm -g install coffeelint"],
-" 			\ "unix" : ["pip install flake8","npm -g install coffeelint"],
-" 			\ }}
-
 "- 囲み文字操作
 NeoBundle 'tpope/vim-surround'
-
-"- vim-scala
-NeoBundle 'derekwyatt/vim-scala'
 
 NeoBundleCheck
 call neobundle#end()
@@ -118,7 +108,7 @@ call neobundle#end()
 filetype plugin indent on
 syntax on
 syntax enable
-colorscheme Tomorrow-Night-Bright
+colorscheme desert
 
 "-
 set number
@@ -136,9 +126,9 @@ set list
 "- indent
 set autoindent
 "set smartindent
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set encoding=utf-8
 set fileencodings=utf-8,ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx-213,euc-jp,sjis,cp932
 
@@ -150,10 +140,10 @@ autocmd FileType * setlocal formatoptions-=ro
 inoremap jj <Esc>
 
 "- 閉じ括弧補完
-inoremap ( ()
-inoremap { {}
-inoremap [ []
-inoremap < <>
+"inoremap ( ()
+"inoremap { {}
+"inoremap [ []
+"inoremap < <>
 
 "- <C-c>２回でハイライト消す
 set hlsearch
@@ -185,9 +175,9 @@ nnoremap s< <C-w><
 
 if has("autocmd")
 	filetype indent on
-	autocmd FileType ruby		setlocal sw=2 sts=2 ts=2 et
-	autocmd FileType eruby		setlocal sw=2 sts=2 ts=2 et
-	autocmd FileType scss		setlocal sw=2 sts=2 ts=2 et
-	autocmd FileType html		setlocal sw=4 sts=4 ts=4 et
+	autocmd FileType ruby				setlocal sw=2 sts=2 ts=2 et
+	autocmd FileType eruby			setlocal sw=2 sts=2 ts=2 et
+	autocmd FileType scss				setlocal sw=2 sts=2 ts=2 et
+	autocmd FileType html				setlocal sw=4 sts=4 ts=4 et
 	autocmd FileType javascript setlocal sw=2 sts=2 ts=2 et
 endif
