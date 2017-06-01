@@ -11,8 +11,11 @@ export OUTPUT_CHARSET=utf-8
 export XDG_DATA_HOME=/usr/local/share
 export LS_COLORS='di=01;36'
 export ZLS_COLORS=$LS_COLORS
+export PATH=/usr/local/aws/bin:$PATH
+export DYLD_LIBRARY_PATH=/usr/lib/:$DYLD_LIBRARY_PATH
 
 # autoload
+autoload -U compinit
 autoload -Uz compinit; compinit
 autoload -Uz url-quote-magic; zle -N self-insert url-quote-magic
 autoload -U colors; colors
@@ -60,6 +63,9 @@ alias co='checkout'
 alias path="echo -e ${PATH//:/\\n}"
 alias ll="ls -a -l"
 alias rm="rm -rf"
+alias gprod="git pull --rebase origin develop"
+alias tf="terraform"
+alias hb="hub browse"
 
 # others
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
@@ -77,8 +83,20 @@ bindkey "^N" history-beginning-search-forward-end
 bindkey "^R" history-incremental-search-backward
 bindkey "^S" history-incremental-search-forward
 function history-all { history -E 1 }
-PROMPT="%{${fg[cyan]}%}%n%{${fg[yellow]}%} %~%{${reset_color}%}"
-PROMPT+=" %{$color%}$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1 /')%b%{${reset_color}%}"
+function precmd() {
+	PROMPT="%{${fg[cyan]}%}%n%{${fg[yellow]}%} %~%{${reset_color}%}"
+	st=`git status 2>/dev/null`
+	if [[ -n `echo "$st" | grep "^nothing to"` ]]; then
+		color=${fg[cyan]}
+	elif [[ -n `echo "$st" | grep "^nothing added"` ]]; then
+		color=${fg[blue]}
+	elif [[ -n `echo "$st" | grep "^# Untracked"` ]]; then
+		color=${fg_bold[red]}
+	else
+		color=${fg[red]}
+	fi
+	PROMPT+=" %{$color%}$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1 /')%b%{${reset_color}%}"
+}
 e_normal=`echo -e "\033[0;30m"`
 e_RED=`echo -e "\033[1;31m"`
 e_BLUE=`echo -e "\033[1;36m"`
@@ -90,6 +108,7 @@ PATH=/usr/local/bin:$PATH
 export PATH
 fpath=(~/.zsh/functions/Completion ${fpath})
 
+eval "$(direnv hook zsh)"
 
 # Python
 export NOSE_REDNOSE=1
@@ -101,10 +120,8 @@ setopt no_checkjobs
 setopt notify
 
 # go
-export GOROOT=/Users/satodaisuke/.gvm/gos/go1.3.3/
-export GOPATH=/Users/satodaisuke/.gvm/pkgsets/go1.3.3/global/
-export PATH=“$GOROOT/bin/$PATH”
-
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
 #Swift
 SDKROOT=$(xcrun --show-sdk-path -sdk macosx)
@@ -121,10 +138,6 @@ if which nvm > /dev/null; then source $(brew --prefix nvm)/nvm.sh; fi
 export SWIFTENV_ROOT="$HOME/.swiftenv"
 export PATH="$SWIFTENV_ROOT/bin:$PATH"
 if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi
-
-# Docker
-alias dm="docker-machine"
-alias dc="docker-compose"
 
 # Ruby
 alias be="bundle exec"
