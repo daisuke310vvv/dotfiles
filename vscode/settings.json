@@ -1,0 +1,67 @@
+{
+    // Window
+    "window.zoomLevel": 0,
+    // Editor
+    "editor.fontSize": 14,
+    "editor.tabSize": 2,
+    "editor.renderWhitespace": "boundary",
+    "editor.formatOnSave": true,
+    "editor.formatOnType": false,
+    "editor.formatOnPaste": false,
+    "editor.minimap.enabled": false,
+    "editor.wordWrap": "bounded",
+    "editor.renderControlCharacters": true,
+    "editor.renderIndentGuides": true,
+    "editor.links": true,
+    "editor.matchBrackets": true,
+    // Terminal
+    "terminal.integrated.fontSize": 11,
+    "terminal.integrated.rendererType": "dom",
+    // Files
+    "files.insertFinalNewline": true,
+    "files.autoGuessEncoding": true,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.DS_Store": true,
+        "**/bin": true
+    },
+    "files.associations": {
+        "*.js": "javascriptreact"
+    },
+    // Workbench
+    "workbench.editor.enablePreview": false,
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "workbench.editor.showTabs": true,
+    "workbench.editor.tabSizing": "shrink",
+    // Go
+    "go.useLanguageServer": true,
+    "go.formatTool": "goimports",
+    "go.alternateTools": {
+        "go-langserver": "gopls"
+    },
+    "go.toolsEnvVars": {
+        "GO111MODULE": "on"
+    },
+    "go.languageServerExperimentalFeatures": {
+        "format": true,
+        "autoComplete": true,
+        "rename": true,
+        "goToDefinition": true,
+        "hover": true,
+        "signatureHelp": true,
+        "goToTypeDefinition": true,
+        "goToImplementation": true,
+        "documentSymbols": true,
+        "workspaceSymbols": true,
+        "findReferences": true,
+        "diagnostics": true
+    },
+    "gopls": {
+        "usePlaceholders": false,
+        "enhancedHover": false
+    },
+    "[go]": {
+        "editor.tabSize": 4
+    }
+}

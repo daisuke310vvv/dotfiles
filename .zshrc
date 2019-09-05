@@ -1,13 +1,10 @@
-autoload -U compinit
-compinit
-
-setopt share_history
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
+export TERM=xterm-256color
 function precmd() {
-	PROMPT="%F{051}%n"
+	PROMPT="%F{051}%n@%m"
 	RPROMPT="[%F{248}%~%f]"
 	st=`git status 2>/dev/null`
 	if [[ -n `echo "$st" | grep "^nothing to"` ]]; then
@@ -24,6 +21,7 @@ function precmd() {
 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
+setopt share_history
 setopt auto_list
 setopt auto_menu
 setopt auto_pushd
@@ -52,9 +50,11 @@ autoload -Uz add-zsh-hook
 autoload -Uz compinit && compinit -u
 autoload -Uz url-quote-magic
 autoload -Uz vcs_info
+autoload colors && colors
 
 zle -N self-insert url-quote-magic
 
+export LANG=en_US.UTF-8
 export CLICOLOR=true
 export LSCOLORS='exfxcxdxbxGxDxabagacad'
 export LS_COLORS='di=92:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:'
@@ -72,3 +72,24 @@ zstyle ':completion:*:options' description 'yes'
 
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+export PATH="/usr/local/opt/terraform@0.11/bin:$PATH"
+export PATH=$HOME/.nodebrew/current/bin:$PATH
+export PATH="$HOME/.rbenv/bin:$PATH"
+export NVM_DIR="$HOME/.nvm"
+export PATH="/usr/local/opt/gettext/bin:$PATH"
+
+alias d='docker'
+alias dc='docker-compose'
+alias du='/usr/bin/dropbox_uploader.sh'
+alias tf='/usr/local/opt/terraform@0.11/bin/terraform'
+alias tf12='/usr/local/opt/terraform@0.12/bin/terraform'
+alias gc='gcloud'
+
+eval "$(rbenv init -)"
+eval "$(direnv hook zsh)"
+
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"
+[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"
+
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
