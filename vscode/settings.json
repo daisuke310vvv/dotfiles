@@ -62,6 +62,9 @@
         "enhancedHover": false
     },
     "[go]": {
-        "editor.tabSize": 4
+        "editor.tabSize": 4,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        }
     }
 }
