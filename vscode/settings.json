@@ -1,6 +1,6 @@
 {
     // Window
-    "window.zoomLevel": 0,
+    "window.zoomLevel": -1,
     // Editor
     "editor.fontSize": 14,
     "editor.tabSize": 2,
@@ -66,5 +66,7 @@
         "editor.codeActionsOnSave": {
             "source.organizeImports": true
         }
-    }
+    },
+    "extensions.ignoreRecommendations": false,
+    "dart.flutterSdkPath": "/home/dsk/github.com/flutter/flutter"
 }
