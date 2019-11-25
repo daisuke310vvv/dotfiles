@@ -1,0 +1,15 @@
+tap 'homebrew/cask'
+cask_args appdir: '/Applications'
+
+brew 'jq'
+brew 'hub'
+brew 'direnv'
+brew 'carthage'
+brew 'terraform'
+brew 'terraform@0.11'
+
+cask 'docker'
+cask 'postman'
+cask 'android-studio'
+cask 'dbeaver-community'
+cask 'visual-studio-code'
