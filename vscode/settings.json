@@ -1,19 +1,23 @@
 {
     // Window
-    "window.zoomLevel": -1,
+    "window.zoomLevel": 0,
     // Editor
-    "editor.fontSize": 14,
     "editor.tabSize": 2,
-    "editor.renderWhitespace": "boundary",
+    "editor.fontSize": 14,
     "editor.formatOnSave": true,
     "editor.formatOnType": false,
     "editor.formatOnPaste": false,
     "editor.minimap.enabled": false,
-    "editor.wordWrap": "on",
+    "editor.wordWrap": "wordWrapColumn",
     "editor.renderControlCharacters": true,
     "editor.renderIndentGuides": true,
     "editor.links": true,
-    "editor.matchBrackets": true,
+    "editor.matchBrackets": "near",
+    "editor.wordWrapColumn": 150,
+    "editor.renderWhitespace": "boundary",
+    "dart.lineLength": 150,
+    // Extension
+    "extensions.ignoreRecommendations": false,
     // Terminal
     "terminal.integrated.fontSize": 11,
     "terminal.integrated.rendererType": "dom",
@@ -21,9 +25,11 @@
     "files.insertFinalNewline": true,
     "files.autoGuessEncoding": true,
     "files.exclude": {
+        "**/.DS_Store": true,
         "**/.git": true,
         "**/.svn": true,
-        "**/.DS_Store": true,
+        "**/*.freezed.dart": true,
+        "**/*.g.dart": true,
         "**/bin": true
     },
     "files.associations": {
@@ -34,14 +40,33 @@
     "workbench.editor.enablePreviewFromQuickOpen": false,
     "workbench.editor.showTabs": true,
     "workbench.editor.tabSizing": "shrink",
+    // Vim
+    "vim.statusBarColorControl": false,
+    //
+    // Launguage Setting
+    //
+    // Dart
+    "dart.flutterSdkPath": "/Users/dsk/github.com/flutter/flutter",
+    "dart.autoImportCompletions": false,
+    "[dart]": {
+        "editor.rulers": [
+            150
+        ],
+        "editor.selectionHighlight": false,
+        "editor.suggest.snippetsPreventQuickSuggestions": false,
+        "editor.suggestSelection": "first",
+        "editor.tabCompletion": "onlySnippets",
+        "editor.wordBasedSuggestions": false,
+    },
+    //
     // Go
     "go.useLanguageServer": true,
     "go.formatTool": "goimports",
-    "go.alternateTools": {
-        "go-langserver": "gopls"
-    },
     "go.toolsEnvVars": {
         "GO111MODULE": "on"
+    },
+    "go.alternateTools": {
+        "go-langserver": "gopls"
     },
     "go.languageServerExperimentalFeatures": {
         "format": true,
@@ -67,6 +92,6 @@
             "source.organizeImports": true
         }
     },
-    "extensions.ignoreRecommendations": false,
-    "dart.flutterSłkPath": "/Users/dsk/github.com/flutter/flutter"
+    "dart.flutterHotRestartOnSave": false,
+    "terminal.integrated.scrollback": 2000
 }

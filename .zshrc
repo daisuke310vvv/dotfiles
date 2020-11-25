@@ -54,13 +54,20 @@ autoload colors && colors
 
 zle -N self-insert url-quote-magic
 
-export LANG=en_US.UTF-8
+export LANG=ja_JP.UTF-8
 export CLICOLOR=true
 export LSCOLORS='exfxcxdxbxGxDxabagacad'
 export LS_COLORS='di=92:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:'
 
 export GOPATH=/Users/dsk/.go
+export PATH=$PATH:$GOPATH/bin
 export PATH=$HOME/github.com/flutter/flutter/bin:$PATH
+export JAVA_HOME=$(/usr/libexec/java_home)
+
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+
+export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*' group-name ''
@@ -78,4 +85,7 @@ alias tf='/usr/local/Cellar/terraform@0.11/0.11.14/bin/terraform'
 
 if which direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"

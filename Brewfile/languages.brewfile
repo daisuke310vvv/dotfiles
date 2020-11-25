@@ -4,3 +4,20 @@ cask_args appdir: '/Applications'
 ## Ruby
 #
 brew 'rbenv'
+
+## Java
+#
+# cask 'java'
+
+## Python
+#
+brew 'pyenv'
+
+## Node
+#
+brew 'nvm'
+
+## Dart
+#
+tap 'dart-lang/dart'
+brew 'dart'
