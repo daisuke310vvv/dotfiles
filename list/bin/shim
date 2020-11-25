@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-export NODE_PATH=/Users/dsk/github.com/daisuke310vvv/dotfiles/list/lib/node_modules
-export NPM_CONFIG_PREFIX=/Users/dsk/github.com/daisuke310vvv/dotfiles/list
-export npm_config_prefix=/Users/dsk/github.com/daisuke310vvv/dotfiles/list
-exec list/bin/node "$@"
