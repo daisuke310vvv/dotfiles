@@ -57,19 +57,13 @@ zle -N self-insert url-quote-magic
 export LANG=ja_JP.UTF-8
 export CLICOLOR=true
 export LSCOLORS='exfxcxdxbxGxDxabagacad'
-export LS_COLORS='di=92:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:'
+export LS_COLORS='di=94:ln=35:so=32:pi=33:ex=31:bd=36;01:cd=33;01:su=31;40;07:sg=36;40;07:tw=32;40;07:ow=33;40;07:'
 
 export GOPATH=/Users/daisuke.sato.a.ts/.go
 export PATH=$PATH:$GOPATH/bin
 export PATH=$HOME/github.com/flutter/flutter/bin:$PATH
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home
 export PATH="/opt/homebrew/opt/mysql@5.7/bin:$PATH"
 export PATH=$PATH:$HOME/.pub-cache/bin
-
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
-source "/opt/homebrew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
-
 
 zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*' group-name ''
@@ -86,18 +80,23 @@ alias dc='docker-compose'
 alias tf='/usr/local/Cellar/terraform@0.11/0.11.14/bin/terraform'
 
 if which direnv > /dev/null; then eval "$(direnv hook zsh)"; fi
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
 
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
-export PATH="$PATH":"$HOME/.asdf/installs/flutter/2.5.2/.pub-cache/bin"
 #export CGO_CXXFLAGS="--std=c++11"
 #export CGO_CPPFLAGS="-I/opt/homebrew/Cellar/opencv/4.5.3_2/include"
 #export CGO_LDFLAGS="-L/opt/homebrew/Cellar/opencv/4.5.3_2/lib -lopencv_stitching -lopencv_superres -lopencv_videostab -lopencv_aruco -lopencv_bgsegm -lopencv_bioinspired -lopencv_ccalib -lopencv_dnn_objdetect -lopencv_dpm -lopencv_face -lopencv_photo -lopencv_fuzzy -lopencv_hfs -lopencv_img_hash -lopencv_line_descriptor -lopencv_optflow -lopencv_reg -lopencv_rgbd -lopencv_saliency -lopencv_stereo -lopencv_structured_light -lopencv_phase_unwrapping -lopencv_surface_matching -lopencv_tracking -lopencv_datasets -lopencv_dnn -lopencv_plot -lopencv_xfeatures2d -lopencv_shape -lopencv_video -lopencv_ml -lopencv_ximgproc -lopencv_calib3d -lopencv_features2d -lopencv_highgui -lopencv_videoio -lopencv_flann -lopencv_xobjdetect -lopencv_imgcodecs -lopencv_objdetect -lopencv_xphoto -lopencv_imgproc -lopencv_core"
 
-export GOENV_ROOT="${HOME}/.goenv"
 export PATH="${GOENV_ROOT}/bin:$PATH"
-eval "$(goenv init -)"
+export PATH="/usr/local/opt/mysql-client/bin:$PATH"
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+export PATH=$PATH:/Users/daisuke.sato.a.ts/Library/Android/sdk/platform-tools
+export C_INCLUDE_PATH=/opt/homebrew/include:$C_INCLUDE_PATH
+export LIBRARY_PATH=/opt/homebrew/lib:$LIBRARY_PATH
+#export PATH="/opt/homebrew/opt/openjdk@19/bin:$PATH"
+#export CPPFLAGS="-I/opt/homebrew/opt/openjdk@19/include"
+
+#. ~/.asdf/plugins/java/set-java-home.zsh
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home
+export PATH="$JAVA_HOME/bin:$PATH"
+export ANDROID_HOME=$HOME'/Library/Android/sdk'
+
