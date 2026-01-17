@@ -1,0 +1,11 @@
+# カスタムキーバインド
+
+[[manager.prepend_keymap]]
+on   = ["T"]
+run  = 'shell "tmux neww -c \"$@\"" --confirm'
+desc = "選択したディレクトリでtmuxの新しいウィンドウを開く"
+
+[[manager.prepend_keymap]]
+on   = ["g", "t"]
+run  = 'shell "tmux split-window -h -c \"$@\"" --confirm'
+desc = "選択したディレクトリでtmuxのペインを縦分割"
