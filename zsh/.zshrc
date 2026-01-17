@@ -17,6 +17,17 @@ function precmd() {
 		color=196
 	fi
 	PROMPT+=" %F{$color}$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1 /')%b%f"
+
+	# tmuxウィンドウ名を動的に更新（リポジトリ名[ブランチ名]）
+	if [[ -n "$TMUX" ]]; then
+		local repo_name="${PWD:t}"
+		local branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+		if [[ -n "$branch" ]]; then
+			tmux rename-window "${repo_name}[${branch}]" 2>/dev/null
+		else
+			tmux rename-window "${repo_name}" 2>/dev/null
+		fi
+	fi
 }
 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
