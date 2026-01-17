@@ -3,8 +3,8 @@
 ## 基本設定
 
 ### リーダーキー
-- **Leader**: `Space`
-- **Local Leader**: `Space`
+- **Leader**: `;` (セミコロン)
+- **Local Leader**: `;` (セミコロン)
 
 ---
 
@@ -19,8 +19,8 @@
 ### ファイル操作
 | キー | モード | 動作 | 説明 |
 |------|--------|------|------|
-| `<leader>w` | Normal | `<cmd>w<CR>` | ファイルを保存 |
-| `<leader>q` | Normal | `<cmd>q<CR>` | 終了 |
+| `;`w` | Normal | `<cmd>w<CR>` | ファイルを保存 |
+| `;`q` | Normal | `<cmd>q<CR>` | 終了 |
 
 ### ウィンドウ移動
 | キー | モード | 動作 | 説明 |
@@ -29,10 +29,10 @@
 | `<C-j>` | Normal | `<C-w>j` | 下のウィンドウへ移動 |
 | `<C-k>` | Normal | `<C-w>k` | 上のウィンドウへ移動 |
 | `<C-l>` | Normal | `<C-w>l` | 右のウィンドウへ移動 |
-| `<leader>h` | Normal | `<C-w>h` | 左のウィンドウへ移動（tmux用） |
-| `<leader>j` | Normal | `<C-w>j` | 下のウィンドウへ移動（tmux用） |
-| `<leader>k` | Normal | `<C-w>k` | 上のウィンドウへ移動（tmux用） |
-| `<leader>l` | Normal | `<C-w>l` | 右のウィンドウへ移動（tmux用） |
+| `;`h` | Normal | `<C-w>h` | 左のウィンドウへ移動（tmux用） |
+| `;`j` | Normal | `<C-w>j` | 下のウィンドウへ移動（tmux用） |
+| `;`k` | Normal | `<C-w>k` | 上のウィンドウへ移動（tmux用） |
+| `;`l` | Normal | `<C-w>l` | 右のウィンドウへ移動（tmux用） |
 
 ### バッファ移動
 | キー | モード | 動作 | 説明 |
@@ -54,17 +54,17 @@
 
 | キー | 動作 | 説明 |
 |------|------|------|
-| `<leader>ff` | `<cmd>Telescope find_files<cr>` | ファイル検索 |
-| `<leader>fg` | `<cmd>Telescope live_grep<cr>` | 全文検索 |
-| `<leader>fb` | `<cmd>Telescope buffers<cr>` | バッファ一覧 |
-| `<leader>fh` | `<cmd>Telescope help_tags<cr>` | ヘルプタグ検索 |
-| `<leader>fr` | `<cmd>Telescope oldfiles<cr>` | 最近開いたファイル |
+| `;`ff` | `<cmd>Telescope find_files<cr>` | ファイル検索 |
+| `;`fg` | `<cmd>Telescope live_grep<cr>` | 全文検索 |
+| `;`fb` | `<cmd>Telescope buffers<cr>` | バッファ一覧 |
+| `;`fh` | `<cmd>Telescope help_tags<cr>` | ヘルプタグ検索 |
+| `;`fr` | `<cmd>Telescope oldfiles<cr>` | 最近開いたファイル |
 
 ### Neo-tree（ファイルツリー）
 
 | キー | 動作 | 説明 |
 |------|------|------|
-| `<leader>e` | `<cmd>Neotree toggle<cr>` | ファイルツリーの表示切り替え |
+| `;`e` | `<cmd>Neotree toggle<cr>` | ファイルツリーの表示切り替え |
 
 ### LSP（Language Server Protocol）
 
@@ -73,8 +73,8 @@
 | `gd` | `vim.lsp.buf.definition` | 定義へジャンプ |
 | `gr` | `vim.lsp.buf.references` | 参照箇所へジャンプ |
 | `K` | `vim.lsp.buf.hover` | ホバー情報を表示 |
-| `<leader>ca` | `vim.lsp.buf.code_action` | コードアクション |
-| `<leader>rn` | `vim.lsp.buf.rename` | リネーム |
+| `;`ca` | `vim.lsp.buf.code_action` | コードアクション |
+| `;`rn` | `vim.lsp.buf.rename` | リネーム |
 | `[d` | `vim.diagnostic.goto_prev` | 前の診断へ移動 |
 | `]d` | `vim.diagnostic.goto_next` | 次の診断へ移動 |
 
@@ -96,15 +96,30 @@
 |------|------|------|
 | `]c` | `gs.next_hunk` | 次のhunkへ移動 |
 | `[c` | `gs.prev_hunk` | 前のhunkへ移動 |
-| `<leader>hs` | `gs.stage_hunk` | hunkをステージ |
-| `<leader>hr` | `gs.reset_hunk` | hunkをリセット |
-| `<leader>hp` | `gs.preview_hunk` | hunkをプレビュー |
+| `;`hs` | `gs.stage_hunk` | hunkをステージ |
+| `;`hr` | `gs.reset_hunk` | hunkをリセット |
+| `;`hp` | `gs.preview_hunk` | hunkをプレビュー |
 
 ### LazyGit
 
 | キー | 動作 | 説明 |
 |------|------|------|
-| `<leader>gg` | `<cmd>LazyGit<cr>` | LazyGitを起動 |
+| `;`gg` | `<cmd>LazyGit<cr>` | LazyGitを起動 |
+
+### Claude Code（AIコーディングアシスタント）
+
+| キー | モード | 動作 | 説明 |
+|------|--------|------|------|
+| `;`ac` | Normal | `<cmd>ClaudeCode<cr>` | Claudeターミナルの切り替え |
+| `;`af` | Normal | `<cmd>ClaudeCodeFocus<cr>` | Claudeにフォーカス |
+| `;`ar` | Normal | `<cmd>ClaudeCode --resume<cr>` | 前回のセッションを再開 |
+| `;`aC` | Normal | `<cmd>ClaudeCode --continue<cr>` | セッションを継続 |
+| `;`am` | Normal | `<cmd>ClaudeCodeSelectModel<cr>` | モデルを選択 |
+| `;`ab` | Normal | `<cmd>ClaudeCodeAdd %<cr>` | 現在のバッファをコンテキストに追加 |
+| `;`as` | Visual | `<cmd>ClaudeCodeSend<cr>` | 選択範囲をClaudeに送信 |
+| `;`as` | neo-tree等 | `<cmd>ClaudeCodeTreeAdd<cr>` | ファイルをコンテキストに追加 |
+| `;`aa` | Normal | `<cmd>ClaudeCodeDiffAccept<cr>` | Diff変更を受け入れ |
+| `;`ad` | Normal | `<cmd>ClaudeCodeDiffDeny<cr>` | Diff変更を拒否 |
 
 ---
 
@@ -112,16 +127,17 @@
 
 | プレフィックス | グループ名 | 説明 |
 |----------------|-----------|------|
-| `<leader>f` | Find | Telescope検索機能 |
-| `<leader>g` | Git | Git関連機能 |
-| `<leader>h` | Hunk | Git hunk操作 |
-| `<leader>c` | Code | コード操作 |
-| `<leader>r` | Rename | リネーム操作 |
+| `;`f` | Find | Telescope検索機能 |
+| `;`g` | Git | Git関連機能 |
+| `;`h` | Hunk | Git hunk操作 |
+| `;`c` | Code | コード操作 |
+| `;`r` | Rename | リネーム操作 |
+| `;`a` | AI/Claude | Claude Code機能 |
 
 ---
 
 ## 補足
 
-- **tmux上でCtrlキーが効かない場合**: `<leader>h/j/k/l`でウィンドウ移動可能
-- **which-key**: `<leader>`を押すと、利用可能なキーバインドがポップアップ表示される
+- **tmux上でCtrlキーが効かない場合**: `;h/j/k/l`でウィンドウ移動可能
+- **which-key**: `;`（セミコロン）を押すと、利用可能なキーバインドがポップアップ表示される
 - **自動補完**: `<Tab>`でスニペットのジャンプも可能

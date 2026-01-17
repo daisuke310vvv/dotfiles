@@ -1,4 +1,4 @@
-# カスタムキーバインド
+#  カスタムキーバインド
 
 [[manager.prepend_keymap]]
 on   = ["T"]

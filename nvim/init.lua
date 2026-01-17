@@ -56,9 +56,9 @@ vim.opt.updatetime = 250
 -- キーバインド
 -- ====================
 
--- リーダーキーをスペースに
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+-- リーダーキーをセミコロンに
+vim.g.mapleader = ";"
+vim.g.maplocalleader = ";"
 
 -- jkでノーマルモードに戻る
 vim.keymap.set("i", "jk", "<Esc>", { desc = "Exit insert mode" })
@@ -96,19 +96,118 @@ vim.keymap.set("n", "<leader>q", "<cmd>q<CR>", { desc = "Quit" })
 require("lazy").setup({
   -- カラースキーム
   {
-    "folke/tokyonight.nvim",
+    "EdenEast/nightfox.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd([[colorscheme tokyonight]])
+      require("nightfox").setup({
+        options = {
+          compile_path = vim.fn.stdpath("cache") .. "/nightfox",
+          compile_file_suffix = "_compiled",
+          transparent = false,
+          terminal_colors = true,
+          dim_inactive = false,
+          module_default = true,
+          colorblind = {
+            enable = false,
+            simulate_only = false,
+            severity = {
+              protan = 0,
+              deutan = 0,
+              tritan = 0,
+            },
+          },
+          styles = {
+            comments = "italic",
+            conditionals = "NONE",
+            constants = "NONE",
+            functions = "NONE",
+            keywords = "bold",
+            numbers = "NONE",
+            operators = "NONE",
+            strings = "NONE",
+            types = "NONE",
+            variables = "NONE",
+          },
+          inverse = {
+            match_paren = false,
+            visual = false,
+            search = false,
+          },
+          modules = {},
+        },
+        groups = {
+          all = {
+            Comment = { fg = "palette.comment", bg = "NONE", style = "italic" },
+            ["@comment"] = { link = "Comment" },
+          },
+        },
+      })
+      -- nightfox, dayfox, dawnfox, duskfox, nordfox, terafox, carbonfox
+      vim.cmd([[colorscheme nightfox]])
+
+      -- コメントの背景色を強制的に消す（Treesitter対応）
+      local palette = require("nightfox.palette").load("nightfox")
+      local comment_hl = { fg = palette.comment, bg = "NONE", italic = true }
+      vim.api.nvim_set_hl(0, "Comment", comment_hl)
+      vim.api.nvim_set_hl(0, "@comment", comment_hl)
     end,
   },
 
   -- ファジーファインダー
   {
     "nvim-telescope/telescope.nvim",
-    branch = "0.1.x",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    -- Neovim 0.11+対応のため最新版を使用
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make",
+        cond = function()
+          return vim.fn.executable("make") == 1
+        end,
+      },
+    },
+    config = function()
+      local telescope = require("telescope")
+      local previewers = require("telescope.previewers")
+
+      telescope.setup({
+        defaults = {
+          -- 検索結果のプレビュー設定
+          layout_config = {
+            horizontal = {
+              preview_width = 0.55,
+            },
+          },
+          -- エラー処理を改善
+          vimgrep_arguments = {
+            "rg",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case",
+            "--hidden",
+          },
+          -- プレビューのタイムアウトを設定
+          preview = {
+            timeout = 500,
+            -- Neovim 0.11+でTreesitterのAPIが変更されたため、
+            -- エラーが出る場合はシンタックスハイライトをvimのregexに変更
+            treesitter = pcall(vim.treesitter.language.get_lang, "lua"),
+          },
+          -- プレビューアの設定
+          file_previewer = previewers.vim_buffer_cat.new,
+          grep_previewer = previewers.vim_buffer_vimgrep.new,
+          qflist_previewer = previewers.vim_buffer_qflist.new,
+        },
+      })
+
+      -- fzf-nativeをロード（存在する場合）
+      pcall(telescope.load_extension, "fzf")
+    end,
     keys = {
       { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files" },
       { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
@@ -132,6 +231,9 @@ require("lazy").setup({
       { "<leader>e", "<cmd>Neotree toggle<cr>", desc = "Toggle file tree" },
     },
     opts = {
+      window = {
+        width = 30,
+      },
       filesystem = {
         follow_current_file = { enabled = true },
       },
@@ -152,15 +254,16 @@ require("lazy").setup({
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     lazy = false,
-    config = function()
-      -- 言語パーサーを手動でインストール: :TSInstall lua vim bash javascript typescript python go rust json yaml toml markdown
-      -- ハイライトを有効化
-      vim.api.nvim_create_autocmd("FileType", {
-        callback = function()
-          pcall(vim.treesitter.start)
-        end,
-      })
-    end,
+    opts = {
+      -- パーサーをインストールする言語のリスト
+      ensure_install = {
+        "lua", "vim", "vimdoc", "bash",
+        "javascript", "typescript", "python",
+        "go", "rust", "json", "yaml", "toml", "markdown"
+      },
+      -- 言語パーサーの自動インストールを有効化
+      auto_install = true,
+    },
   },
 
   -- 括弧自動補完
@@ -337,7 +440,7 @@ require("lazy").setup({
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {
       options = {
-        theme = "tokyonight",
+        theme = "auto",
       },
     },
   },
@@ -360,7 +463,44 @@ require("lazy").setup({
         { "<leader>h", group = "Hunk" },
         { "<leader>c", group = "Code" },
         { "<leader>r", group = "Rename" },
+        { "<leader>a", group = "AI/Claude" },
       },
+    },
+  },
+
+  -- Snacks.nvim (claudecode.nvimの依存関係)
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    opts = {},
+  },
+
+  -- Claude Code (AI coding assistant)
+  {
+    "coder/claudecode.nvim",
+    dependencies = { "folke/snacks.nvim" },
+    opts = {
+      terminal_cmd = "/opt/homebrew/bin/claude",
+    },
+    keys = {
+      { "<leader>a", nil, desc = "AI/Claude Code" },
+      { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+      { "<leader>af", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
+      { "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
+      { "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
+      { "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
+      { "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
+      { "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+      {
+        "<leader>as",
+        "<cmd>ClaudeCodeTreeAdd<cr>",
+        desc = "Add file",
+        ft = { "NvimTree", "neo-tree", "oil", "minifiles", "netrw" },
+      },
+      -- Diff管理
+      { "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
+      { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
     },
   },
 })

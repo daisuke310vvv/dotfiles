@@ -10,7 +10,7 @@
 
 # フォントファミリー
 # 利用可能なフォント一覧: ghostty +list-fonts
-font-family = "HackGen Console NF"
+font-family = "Cica"
 
 # フォントサイズ (ポイント単位)
 font-size = 12
@@ -35,6 +35,10 @@ font-size = 12
 # フォントを太くする（macOS向け、Retina対応）
 font-thicken = true
 # font-thicken-strength = 255
+
+# セルの高さ調整（ピクセル単位、負の値も可）
+# 行間を広げる: 正の値、狭める: 負の値
+adjust-cell-height = 4
 
 # ============================================================================
 # カラー設定 (Colors)
