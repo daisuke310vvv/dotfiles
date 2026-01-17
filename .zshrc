@@ -97,3 +97,9 @@ export ASDF_DATA_DIR="/Users/daisuke.sato.a.ts/.asdf"
 export PATH="$ASDF_DATA_DIR/shims:$PATH"
 
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+export PATH=/opt/homebrew/opt/ruby/bin:/Users/daisuke.sato.a.ts/.asdf/shims:/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin:/Users/daisuke.sato.a.ts/.asdf/shims:/opt/homebrew/opt/asdf/libexec/bin:/opt/homebrew/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin:/opt/homebrew/opt/ruby/bin:/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin:/opt/homebrew/bin:/Users/daisuke.sato.a.ts/.pub-cache/bin:/Users/daisuke.sato.a.ts/Library/Android/sdk/platform-tools:/Users/daisuke.sato.a.ts/.pub-cache/bin:/Users/daisuke.sato.a.ts/Library/Android/sdk/platform-tools:/Users/daisuke.sato.a.ts/.asdf/installs/nodejs/20.19.2/bin
+
+# Created by `pipx` on 2025-08-25 05:50:05
+export PATH="$PATH:/Users/daisuke.sato.a.ts/.local/bin"
