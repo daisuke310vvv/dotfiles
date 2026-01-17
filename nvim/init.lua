@@ -233,6 +233,7 @@ require("lazy").setup({
     opts = {
       window = {
         width = 30,
+        position = "right",
       },
       filesystem = {
         follow_current_file = { enabled = true },
@@ -482,6 +483,10 @@ require("lazy").setup({
     dependencies = { "folke/snacks.nvim" },
     opts = {
       terminal_cmd = "/opt/homebrew/bin/claude",
+      terminal = {
+        split_side = "left",           -- Claude Codeを左側に配置
+        split_width_percentage = 0.30, -- 画面の30%を使用（お好みで調整可能）
+      },
     },
     keys = {
       { "<leader>a", nil, desc = "AI/Claude Code" },

@@ -10,6 +10,8 @@
 
 # フォントファミリー
 # 利用可能なフォント一覧: ghostty +list-fonts
+# 複数指定した場合、最初のフォントで見つからない文字は次のフォントにフォールバック
+font-family = "0xProto"
 font-family = "Cica"
 
 # フォントサイズ (ポイント単位)
@@ -21,7 +23,7 @@ font-size = 12
 # font-family-bold-italic = 
 
 # フォントスタイル (regular, bold, italic, ultralight, etc.)
-# font-style = regular
+font-style = bold
 # font-style-bold = bold
 # font-style-italic = italic
 
@@ -39,6 +41,10 @@ font-thicken = true
 # セルの高さ調整（ピクセル単位、負の値も可）
 # 行間を広げる: 正の値、狭める: 負の値
 adjust-cell-height = 4
+
+# フォントベースラインの調整（ピクセル単位、負の値も可）
+# 正の値: 下に移動、負の値: 上に移動
+adjust-font-baseline = 0
 
 # ============================================================================
 # カラー設定 (Colors)
