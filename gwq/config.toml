@@ -1,0 +1,15 @@
+# gwq (Git Worktree Manager) Configuration
+# https://github.com/d-kuro/gwq
+
+[worktree]
+# Worktreeの基本ディレクトリ
+basedir = "~/github.com"
+
+[naming]
+# ディレクトリの命名テンプレート
+# 使用可能な変数: {repo}, {branch}, {timestamp}
+template = "{{.Host}}/{{.Owner}}/{{.Repository}}={{.Branch}}"
+
+[ui]
+# アイコン表示を有効化
+icons = true

@@ -34,6 +34,10 @@ ln -sf ~/github.com/daisuke310vvv/dotfiles/tmux/tmux.conf ~/.tmux.conf
 mkdir -p ~/.config/yazi
 ln -sf ~/github.com/daisuke310vvv/dotfiles/yazi/keymap.toml ~/.config/yazi/keymap.toml
 
+# gwq（Git Worktree Manager）
+mkdir -p ~/.config/gwq
+ln -sf ~/github.com/daisuke310vvv/dotfiles/gwq/config.toml ~/.config/gwq/config.toml
+
 # Neovim（将来追加予定）
 ln -sf ~/github.com/daisuke310vvv/dotfiles/nvim ~/.config/nvim
 ```
@@ -44,7 +48,10 @@ ln -sf ~/github.com/daisuke310vvv/dotfiles/nvim ~/.config/nvim
 dotfiles/
 ├── bin/              # インストール・セットアップスクリプト
 │   ├── install.sh           # メインインストーラー（全設定を一括適用）
-│   └── install-yazi.sh      # yaziとその依存関係をbrewでインストール
+│   ├── install-yazi.sh      # yaziとその依存関係をbrewでインストール
+│   ├── tmux-ghq-session.sh  # ghq+fzfでtmuxセッション作成・切り替え
+│   ├── tmux-gwq-worktree.sh # gwq+fzfでworktree作成・新ウィンドウ起動
+│   └── tmux-gwq-remove.sh   # gwq+fzfでworktree削除
 │
 ├── zsh/              # Zsh設定（カスタムプロンプト、履歴管理、補完設定）
 │   └── .zshrc               # メイン設定ファイル
@@ -57,6 +64,9 @@ dotfiles/
 │
 ├── yazi/             # yaziファイルマネージャー設定
 │   └── keymap.toml          # キーマップ定義
+│
+├── gwq/              # gwq（Git Worktree Manager）設定
+│   └── config.toml          # メイン設定ファイル
 │
 ├── nvim/             # Neovim設定（現在は空）
 │
@@ -79,14 +89,40 @@ dotfiles/
 - **プレフィックスキー**: `Ctrl-a`（デフォルトの`Ctrl-b`から変更）
 - **ペイン分割**: `\` (縦分割), `-` (横分割)
 - **vim風ナビゲーション**: `h/j/k/l`でペイン移動
-- **yazi起動**: `Ctrl-a e`でファイラー起動
+- **ghq + fzf**: `Ctrl-a g`でリポジトリ選択し、セッション作成・切り替え
+  - 既存セッションがあれば自動的にそのセッションに切り替え
+  - 存在しない場合のみ新しいセッションを作成
+  - セッション名はリポジトリ名（例: `dotfiles`）
+- **gwq + fzf**: `Ctrl-a t`でworktree作成し、新しいウィンドウで開く
+  - リポジトリを選択 → ブランチ名を入力または既存ブランチから選択
+  - gwqで自動的にworktreeを作成
+  - 新しいウィンドウを作成し、ウィンドウ名はブランチ名
+  - 複数ブランチでの並行作業に最適
+- **gwq削除**: `Ctrl-a e`でworktreeを削除
+  - gwq listから削除対象を選択（複数選択可能）
+  - 確認後にworktreeを削除
 - **プラグイン**: TPM、tmux-resurrect（セッション復元）、tmux-continuum（自動保存）、tmux-fzf（`Ctrl-f`で起動）
+
+### gwq (gwq/config.toml)
+- **Worktree管理**: Git worktreeの作成・切り替え・削除をファジー検索で効率化
+- **ベースディレクトリ**: `~/github.com`にworktreeを集約管理
+- **命名規則**: `{{.Host}}/{{.Owner}}/{{.Repository}}={{.Branch}}`形式でディレクトリを自動命名
+  - 例: `~/github.com/github.com/username/repo=feature-branch`
+- **主要コマンド**:
+  - `gwq add -b <branch>`: 新しいworktree作成
+  - `gwq list`: worktree一覧表示
+  - `cd $(gwq get <branch>)`: worktreeに移動
+  - `gwq remove <branch>`: worktree削除
+- **tmux統合**:
+  - `Ctrl-a t`: worktree作成＋新ウィンドウ起動
+  - `Ctrl-a e`: worktree削除（複数選択可能）
 
 ### 依存関係
 - **Homebrew**: パッケージ管理
 - **asdf**: 言語バージョン管理（Node.js、Rubyなど）
 - **TPM**: tmuxプラグイン管理（install.shが自動インストール）
 - **yazi依存**: ffmpegthumbnailer、unar、jq、poppler、fd、ripgrep、fzf、zoxide
+- **gwq**: Git Worktree Manager（install.shが自動インストール）
 
 ## 📝 設定ファイル編集時の注意点
 
@@ -97,6 +133,8 @@ dotfiles/
 3. **Zsh設定の反映**: 新しいターミナルセッションを開くか`source ~/.zshrc`で反映。
 
 4. **PATH設定**: 環境固有のパス（Javaパス、Android SDKパスなど）は適宜修正が必要。
+
+5. **gwq設定**: basedirやtemplateを変更した場合、既存のworktreeには影響しない。新規作成時のみ新しい設定が適用される。
 
 ## 🚀 開発フロー
 

@@ -40,6 +40,21 @@ if [ -d "$DOTFILES_DIR/yazi" ]; then
     echo "✅ Linked yazi/keymap.toml"
 fi
 
+# gwq (Git Worktree Manager)
+if ! command -v gwq &> /dev/null; then
+    echo "📦 Installing gwq..."
+    brew install d-kuro/tap/gwq
+    echo "✅ Installed gwq"
+else
+    echo "✅ gwq already installed"
+fi
+
+if [ -f "$DOTFILES_DIR/gwq/config.toml" ]; then
+    mkdir -p "$HOME/.config/gwq"
+    ln -sf "$DOTFILES_DIR/gwq/config.toml" "$HOME/.config/gwq/config.toml"
+    echo "✅ Linked gwq/config.toml"
+fi
+
 # Neovim
 if [ -d "$DOTFILES_DIR/nvim" ]; then
     rm -rf "$HOME/.config/nvim"
