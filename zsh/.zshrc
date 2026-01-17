@@ -114,3 +114,6 @@ export PATH=/opt/homebrew/opt/ruby/bin:/Users/daisuke.sato.a.ts/.asdf/shims:/Lib
 
 # Created by `pipx` on 2025-08-25 05:50:05
 export PATH="$PATH:/Users/daisuke.sato.a.ts/.local/bin"
+
+# Rust/Cargo
+export PATH="$PATH:/Users/daisuke.sato.a.ts/.cargo/bin"
