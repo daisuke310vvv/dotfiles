@@ -77,6 +77,9 @@ vim.keymap.set("n", "<leader>j", "<C-w>j", { desc = "Move to lower window" })
 vim.keymap.set("n", "<leader>k", "<C-w>k", { desc = "Move to upper window" })
 vim.keymap.set("n", "<leader>l", "<C-w>l", { desc = "Move to right window" })
 
+-- Ctrl+n をウィンドウ操作のプレフィックスに（Ctrl+w の代替）
+vim.keymap.set("n", "<C-n>", "<C-w>", { desc = "Window command prefix" })
+
 -- バッファ移動
 vim.keymap.set("n", "<S-h>", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
 vim.keymap.set("n", "<S-l>", "<cmd>bnext<CR>", { desc = "Next buffer" })
@@ -96,61 +99,21 @@ vim.keymap.set("n", "<leader>q", "<cmd>q<CR>", { desc = "Quit" })
 require("lazy").setup({
   -- カラースキーム
   {
-    "EdenEast/nightfox.nvim",
+    "ellisonleao/gruvbox.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      require("nightfox").setup({
-        options = {
-          compile_path = vim.fn.stdpath("cache") .. "/nightfox",
-          compile_file_suffix = "_compiled",
-          transparent = false,
-          terminal_colors = true,
-          dim_inactive = false,
-          module_default = true,
-          colorblind = {
-            enable = false,
-            simulate_only = false,
-            severity = {
-              protan = 0,
-              deutan = 0,
-              tritan = 0,
-            },
-          },
-          styles = {
-            comments = "italic",
-            conditionals = "NONE",
-            constants = "NONE",
-            functions = "NONE",
-            keywords = "bold",
-            numbers = "NONE",
-            operators = "NONE",
-            strings = "NONE",
-            types = "NONE",
-            variables = "NONE",
-          },
-          inverse = {
-            match_paren = false,
-            visual = false,
-            search = false,
-          },
-          modules = {},
-        },
-        groups = {
-          all = {
-            Comment = { fg = "palette.comment", bg = "NONE", style = "italic" },
-            ["@comment"] = { link = "Comment" },
-          },
+      require("gruvbox").setup({
+        contrast = "hard",  -- "hard", "soft", or "" (default)
+        italic = {
+          strings = false,
+          comments = true,
+          operators = false,
+          folds = true,
         },
       })
-      -- nightfox, dayfox, dawnfox, duskfox, nordfox, terafox, carbonfox
-      vim.cmd([[colorscheme nightfox]])
-
-      -- コメントの背景色を強制的に消す（Treesitter対応）
-      local palette = require("nightfox.palette").load("nightfox")
-      local comment_hl = { fg = palette.comment, bg = "NONE", italic = true }
-      vim.api.nvim_set_hl(0, "Comment", comment_hl)
-      vim.api.nvim_set_hl(0, "@comment", comment_hl)
+      vim.o.background = "dark"
+      vim.cmd([[colorscheme gruvbox]])
     end,
   },
 
@@ -233,7 +196,7 @@ require("lazy").setup({
     opts = {
       window = {
         width = 30,
-        position = "right",
+        position = "left",
       },
       filesystem = {
         follow_current_file = { enabled = true },
@@ -453,6 +416,17 @@ require("lazy").setup({
     opts = {},
   },
 
+  -- Markdownプレビュー
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function() vim.fn["mkdp#util#install"]() end,
+    keys = {
+      { "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", desc = "Markdown Preview" },
+    },
+  },
+
   -- キーバインドヘルプ
   {
     "folke/which-key.nvim",
@@ -481,13 +455,24 @@ require("lazy").setup({
   {
     "coder/claudecode.nvim",
     dependencies = { "folke/snacks.nvim" },
+    lazy = false,
     opts = {
       terminal_cmd = "/opt/homebrew/bin/claude",
       terminal = {
         split_side = "left",           -- Claude Codeを左側に配置
-        split_width_percentage = 0.30, -- 画面の30%を使用（お好みで調整可能）
+        split_width_percentage = 0.30, -- 画面の30%を使用
       },
     },
+    init = function()
+      vim.api.nvim_create_autocmd("VimEnter", {
+        callback = function()
+          -- neo-treeの後に開くため少し遅延
+          vim.defer_fn(function()
+            vim.cmd("ClaudeCode")
+          end, 100)
+        end,
+      })
+    end,
     keys = {
       { "<leader>a", nil, desc = "AI/Claude Code" },
       { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
