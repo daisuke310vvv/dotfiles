@@ -107,21 +107,12 @@ vim.keymap.set("n", "<leader>q", "<cmd>q<CR>", { desc = "Quit" })
 require("lazy").setup({
   -- カラースキーム
   {
-    "ellisonleao/gruvbox.nvim",
+    "uhs-robert/oasis.nvim",
     lazy = false,
     priority = 1000,
     config = function()
-      require("gruvbox").setup({
-        contrast = "hard",  -- "hard", "soft", or "" (default)
-        italic = {
-          strings = false,
-          comments = true,
-          operators = false,
-          folds = true,
-        },
-      })
-      vim.o.background = "dark"
-      vim.cmd([[colorscheme gruvbox]])
+      require("oasis").setup()
+      vim.cmd.colorscheme("oasis-starlight")
     end,
   },
 
