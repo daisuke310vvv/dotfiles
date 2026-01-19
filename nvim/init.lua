@@ -56,9 +56,9 @@ vim.opt.updatetime = 250
 -- キーバインド
 -- ====================
 
--- リーダーキーをセミコロンに
-vim.g.mapleader = ";"
-vim.g.maplocalleader = ";"
+-- リーダーキーをSpaceに
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- jkでノーマルモードに戻る
 vim.keymap.set("i", "jk", "<Esc>", { desc = "Exit insert mode" })
@@ -77,8 +77,16 @@ vim.keymap.set("n", "<leader>j", "<C-w>j", { desc = "Move to lower window" })
 vim.keymap.set("n", "<leader>k", "<C-w>k", { desc = "Move to upper window" })
 vim.keymap.set("n", "<leader>l", "<C-w>l", { desc = "Move to right window" })
 
--- Ctrl+n をウィンドウ操作のプレフィックスに（Ctrl+w の代替）
-vim.keymap.set("n", "<C-n>", "<C-w>", { desc = "Window command prefix" })
+-- ウィンドウリサイズ（Space + Shift + h/j/k/l）
+vim.keymap.set("n", "<leader>H", "<cmd>vertical resize -5<CR>", { desc = "Decrease width" })
+vim.keymap.set("n", "<leader>L", "<cmd>vertical resize +5<CR>", { desc = "Increase width" })
+vim.keymap.set("n", "<leader>K", "<cmd>resize +5<CR>", { desc = "Increase height" })
+vim.keymap.set("n", "<leader>J", "<cmd>resize -5<CR>", { desc = "Decrease height" })
+-- ウィンドウ幅の調整（Space + 1/2/3/4）
+vim.keymap.set("n", "<leader>1", "<cmd>vertical resize -20<CR>", { desc = "Decrease width -20" })
+vim.keymap.set("n", "<leader>2", "<cmd>vertical resize +20<CR>", { desc = "Increase width +20" })
+vim.keymap.set("n", "<leader>3", "<cmd>vertical resize -10<CR>", { desc = "Decrease width -10" })
+vim.keymap.set("n", "<leader>4", "<cmd>vertical resize +10<CR>", { desc = "Increase width +10" })
 
 -- バッファ移動
 vim.keymap.set("n", "<S-h>", "<cmd>bprevious<CR>", { desc = "Previous buffer" })
@@ -424,22 +432,6 @@ require("lazy").setup({
     build = function() vim.fn["mkdp#util#install"]() end,
     keys = {
       { "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", desc = "Markdown Preview" },
-    },
-  },
-
-  -- キーバインドヘルプ
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    opts = {
-      spec = {
-        { "<leader>f", group = "Find" },
-        { "<leader>g", group = "Git" },
-        { "<leader>h", group = "Hunk" },
-        { "<leader>c", group = "Code" },
-        { "<leader>r", group = "Rename" },
-        { "<leader>a", group = "AI/Claude" },
-      },
     },
   },
 
