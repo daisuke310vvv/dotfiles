@@ -11,11 +11,11 @@
 # フォントファミリー
 # 利用可能なフォント一覧: ghostty +list-fonts
 # 複数指定した場合、最初のフォントで見つからない文字は次のフォントにフォールバック
-font-family = "0xProto"
+font-family = "JetBrainsMono Nerd Font"
 font-family = "Cica"
 
 # フォントサイズ (ポイント単位)
-font-size = 12
+font-size = 14
 
 # Bold/Italic フォント（指定しない場合は自動検出）
 # font-family-bold = 

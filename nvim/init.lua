@@ -199,6 +199,11 @@ require("lazy").setup({
       },
       filesystem = {
         follow_current_file = { enabled = true },
+        filtered_items = {
+          visible = true,         -- 隠しファイルを常に表示
+          hide_dotfiles = false,  -- ドットファイルを隠さない
+          hide_gitignored = false, -- .gitignoreされたファイルも表示
+        },
       },
     },
     init = function()
@@ -210,23 +215,6 @@ require("lazy").setup({
         end,
       })
     end,
-  },
-
-  -- シンタックスハイライト
-  {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    lazy = false,
-    opts = {
-      -- パーサーをインストールする言語のリスト
-      ensure_install = {
-        "lua", "vim", "vimdoc", "bash",
-        "javascript", "typescript", "python",
-        "go", "rust", "json", "yaml", "toml", "markdown"
-      },
-      -- 言語パーサーの自動インストールを有効化
-      auto_install = true,
-    },
   },
 
   -- 括弧自動補完
@@ -423,6 +411,66 @@ require("lazy").setup({
     build = function() vim.fn["mkdp#util#install"]() end,
     keys = {
       { "<leader>mp", "<cmd>MarkdownPreviewToggle<cr>", desc = "Markdown Preview" },
+    },
+  },
+
+  -- Obsidian.nvim (Obsidianノート管理)
+  {
+    "epwalsh/obsidian.nvim",
+    version = "*",
+    lazy = true,
+    ft = "markdown",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    opts = {
+      workspaces = {
+        {
+          name = "personal",
+          path = "~/github.com/daisuke310vvv/obsidian/obsidian.dsk",
+        },
+      },
+      -- ノートのID生成（タイトルをそのまま使用）
+      note_id_func = function(title)
+        if title ~= nil then
+          return title
+        else
+          return tostring(os.time())
+        end
+      end,
+      -- 新規ノートの保存場所
+      notes_subdir = "notes",
+      -- デイリーノートの設定
+      daily_notes = {
+        folder = "daily",
+        date_format = "%Y-%m-%d",
+        template = nil,
+      },
+      -- 補完設定
+      completion = {
+        nvim_cmp = true,
+        min_chars = 2,
+      },
+      -- UIの設定
+      ui = {
+        enable = true,
+        checkboxes = {
+          [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
+          ["x"] = { char = "", hl_group = "ObsidianDone" },
+        },
+      },
+    },
+    keys = {
+      { "<leader>on", "<cmd>ObsidianNew<cr>", desc = "New note" },
+      { "<leader>oo", "<cmd>ObsidianOpen<cr>", desc = "Open in Obsidian" },
+      { "<leader>os", "<cmd>ObsidianSearch<cr>", desc = "Search notes" },
+      { "<leader>oq", "<cmd>ObsidianQuickSwitch<cr>", desc = "Quick switch" },
+      { "<leader>od", "<cmd>ObsidianToday<cr>", desc = "Today's note" },
+      { "<leader>oy", "<cmd>ObsidianYesterday<cr>", desc = "Yesterday's note" },
+      { "<leader>ot", "<cmd>ObsidianTomorrow<cr>", desc = "Tomorrow's note" },
+      { "<leader>ob", "<cmd>ObsidianBacklinks<cr>", desc = "Backlinks" },
+      { "<leader>ol", "<cmd>ObsidianLinks<cr>", desc = "Links" },
+      { "<leader>op", "<cmd>ObsidianPasteImg<cr>", desc = "Paste image" },
     },
   },
 
