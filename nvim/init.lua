@@ -217,6 +217,35 @@ require("lazy").setup({
     end,
   },
 
+  -- シンタックスハイライト (Treesitter)
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = function()
+      -- パーサーをインストール
+      local languages = {
+        "lua", "vim", "vimdoc", "query",
+        "html", "css", "javascript", "typescript", "tsx", "json", "jsonc",
+        "go", "gomod", "gosum", "gowork",
+        "ruby",
+        "terraform", "hcl", "dockerfile",
+        "bash",
+        "yaml", "toml",
+        "markdown", "markdown_inline",
+        "gitcommit", "gitignore", "diff",
+      }
+      vim.cmd("TSInstall " .. table.concat(languages, " "))
+    end,
+    lazy = false,
+    config = function()
+      -- ハイライトを全てのバッファで有効化
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function(args)
+          pcall(vim.treesitter.start, args.buf)
+        end,
+      })
+    end,
+  },
+
   -- 括弧自動補完
   {
     "windwp/nvim-autopairs",
@@ -471,57 +500,6 @@ require("lazy").setup({
       { "<leader>ob", "<cmd>ObsidianBacklinks<cr>", desc = "Backlinks" },
       { "<leader>ol", "<cmd>ObsidianLinks<cr>", desc = "Links" },
       { "<leader>op", "<cmd>ObsidianPasteImg<cr>", desc = "Paste image" },
-    },
-  },
-
-  -- Snacks.nvim (claudecode.nvimの依存関係)
-  {
-    "folke/snacks.nvim",
-    priority = 1000,
-    lazy = false,
-    opts = {},
-  },
-
-  -- Claude Code (AI coding assistant)
-  {
-    "coder/claudecode.nvim",
-    dependencies = { "folke/snacks.nvim" },
-    lazy = false,
-    opts = {
-      terminal_cmd = "/opt/homebrew/bin/claude",
-      terminal = {
-        split_side = "left",           -- Claude Codeを左側に配置
-        split_width_percentage = 0.30, -- 画面の30%を使用
-      },
-    },
-    init = function()
-      vim.api.nvim_create_autocmd("VimEnter", {
-        callback = function()
-          -- neo-treeの後に開くため少し遅延
-          vim.defer_fn(function()
-            vim.cmd("ClaudeCode")
-          end, 100)
-        end,
-      })
-    end,
-    keys = {
-      { "<leader>a", nil, desc = "AI/Claude Code" },
-      { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
-      { "<leader>af", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
-      { "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
-      { "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
-      { "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
-      { "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
-      { "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
-      {
-        "<leader>as",
-        "<cmd>ClaudeCodeTreeAdd<cr>",
-        desc = "Add file",
-        ft = { "NvimTree", "neo-tree", "oil", "minifiles", "netrw" },
-      },
-      -- Diff管理
-      { "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
-      { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
     },
   },
 })
